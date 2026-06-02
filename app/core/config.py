@@ -10,6 +10,8 @@ class Settings(BaseSettings):
 
     database_url: str = "sqlite:///./document_intelligence.db"
     upload_dir: str = "uploads"
+    max_upload_size_mb: int = 10
+    openai_api_key: str | None = None
 
 
 settings = Settings()
