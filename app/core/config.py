@@ -12,6 +12,10 @@ class Settings(BaseSettings):
     upload_dir: str = "uploads"
     max_upload_size_mb: int = 10
     openai_api_key: str | None = None
+    openai_model: str = "gpt-4o-mini"
+    llm_timeout_seconds: float = 10.0
+    max_document_chars: int = 15000
+    force_agent_failure: str | None = None
 
 
 settings = Settings()
