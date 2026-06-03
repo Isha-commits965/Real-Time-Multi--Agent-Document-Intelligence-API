@@ -1,0 +1,52 @@
+RESEARCH MEMO
+
+To: Litigation Strategy Team
+From: Priya Sharma, Associate Counsel
+Date: March 14, 2026
+Re: Preliminary Analysis of Meridian v. Coastal Logistics — Breach of Supply Agreement
+
+Executive Summary
+
+This memorandum summarizes our initial review of the dispute between Meridian Manufacturing Ltd. ("Meridian") and Coastal Logistics Inc. ("Coastal") arising from a supply agreement signed on June 1, 2024. Coastal alleges that Meridian failed to deliver 12,000 industrial components by the contractual deadline of January 15, 2026. Meridian counters that force majeure provisions apply due to supply chain disruptions in Maharashtra, India, where a key subcontractor operates. Our preliminary view is that Meridian faces moderate exposure, though several factual gaps remain before we can advise on settlement posture.
+
+Background and Key Parties
+
+Meridian is a mid-sized manufacturer headquartered in Austin, Texas, with annual revenue of approximately $48 million. Its Chief Operations Officer, David Chen, signed the agreement on Meridian's behalf. Coastal Logistics, based in Mumbai, Maharashtra, is represented by General Counsel Rajesh Mehta. The agreement designates the Mumbai Municipal Corporation's commercial registry as the venue for certain administrative filings, though governing law is explicitly Texas law.
+
+Under Section 4.2 of the agreement, Meridian agreed to deliver goods in four quarterly installments beginning September 30, 2024. The final installment of 3,000 units, valued at $1.2 million, was due no later than January 15, 2026. A liquidated damages clause in Section 9.1 imposes penalties of $2,500 per day for late delivery, capped at 15% of the outstanding order value.
+
+Timeline of Events
+
+On November 3, 2025, Meridian notified Coastal in writing that production delays at its Pune facility would affect the Q4 shipment. Coastal acknowledged receipt on November 5, 2025, but stated that the notice period required under Section 11.3 — at least 60 days before the delivery date — had not been satisfied because the notice was issued only 73 days before January 15, 2026. Meridian argues the clause permits notice "within a reasonable period prior to the affected delivery," which it interprets flexibly during documented supply chain emergencies.
+
+By December 20, 2025, Meridian had shipped 1,850 of the 3,000 units. Coastal rejected partial acceptance, citing Section 5.7, which states that partial deliveries require prior written consent. On February 2, 2026, Coastal terminated the agreement and demanded $187,500 in liquidated damages plus recovery of a $75,000 performance bond posted at contract signing.
+
+Contractual Provisions at Issue
+
+Three provisions dominate the dispute. First, the force majeure clause in Section 14.8 lists epidemics, government embargoes, and "extraordinary supplier failures beyond reasonable commercial mitigation" as excusable events. Second, Section 9.1's liquidated damages provision must be evaluated for enforceability under Texas law, particularly whether the daily rate bears a reasonable relationship to anticipated harm. Third, Section 16.2 requires mediation in Austin before either party may initiate litigation.
+
+Meridian has invoked force majeure twice previously under related contracts without challenge, which may support its credibility but is not dispositive here. Coastal's counsel has emphasized that Meridian continued accepting new purchase orders from unrelated clients during the same period, suggesting capacity existed but was prioritized elsewhere.
+
+Financial and Operational Considerations
+
+Coastal claims direct losses of $340,000 from production downtime at its Andheri West assembly plant, plus reputational harm with its end customer, Voltara Energy Systems. Meridian's internal emails — produced in response to our document request — reference a 22% increase in raw material costs between August and December 2025, and a revised production timeline extending completion to March 31, 2026.
+
+The performance bond of $75,000 remains held by First National Trust of Austin. Coastal has threatened to draw on the bond unless Meridian remits liquidated damages within 30 days of its February 2, 2026 termination notice. Meridian's finance team estimates total exposure, including bond forfeiture and legal fees, at between $260,000 and $410,000 depending on whether partial delivery credits apply.
+
+Legal Analysis
+
+Under Texas contract law, a party asserting force majeure must demonstrate that the event was unforeseeable, beyond its control, and that it took reasonable steps to mitigate harm. Meridian's November notice and partial shipment suggest good-faith mitigation efforts, but the late timing of formal notice weakens its position. Courts in the Fifth Circuit have declined to excuse performance where the alleged force majeure event was foreseeable based on industry-wide trends reported more than 90 days before the breach.
+
+The liquidated damages clause is likely enforceable if Coastal can show that actual damages were difficult to estimate at signing and that the stipulated rate is not a penalty. The $2,500 daily rate against a $1.2 million order represents approximately 0.21% per day, which may fall within acceptable bounds but requires comparison to Coastal's documented downtime costs.
+
+Recommendations
+
+We recommend the following next steps within the next 14 days: (1) retain a supply chain expert to evaluate whether Meridian's Pune delays qualify as force majeure; (2) request complete production logs from September 2025 through February 2026; (3) initiate mediation in Austin as required by Section 16.2 before Coastal files suit in Travis County District Court; and (4) explore settlement in the range of $90,000 to $140,000, inclusive of the performance bond, to avoid litigation costs estimated at $85,000 through trial.
+
+Conclusion
+
+This dispute presents a mixed liability picture. Meridian has viable defenses related to notice interpretation and industry-wide supply constraints, but Coastal's strict compliance arguments and documented termination procedures create meaningful risk. Further discovery is essential before advising Meridian on trial strategy or final settlement authority.
+
+Prepared for internal use only. Privileged and confidential attorney work product.
+
+Contact: Priya Sharma | priya.sharma@meridianlegal.example | +1 (512) 555-0142
