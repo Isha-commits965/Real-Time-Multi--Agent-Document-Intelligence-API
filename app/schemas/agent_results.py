@@ -1,6 +1,6 @@
 import enum
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class SentimentLabel(str, enum.Enum):
@@ -43,18 +43,34 @@ class OrganizationEntity(BaseModel):
     mentions: int = Field(ge=0)
 
 
+class CountedEntity(BaseModel):
+    value: str
+    mentions: int = Field(ge=1)
+
+
 class SummarizerResult(BaseModel):
     summary: str
     key_points: list[str] = Field(min_length=3, max_length=5)
     confidence: float = Field(ge=0.0, le=1.0)
 
+    @field_validator("summary")
+    @classmethod
+    def validate_summary_word_count(cls, value: str) -> str:
+        word_count = len(value.split())
+        if word_count < 100 or word_count > 150:
+            raise ValueError(
+                f"summary must be 100-150 words, got {word_count}"
+            )
+        return value
+
 
 class EntityExtractorResult(BaseModel):
     people: list[PersonEntity] = Field(default_factory=list)
     organizations: list[OrganizationEntity] = Field(default_factory=list)
-    dates: list[str] = Field(default_factory=list)
-    locations: list[str] = Field(default_factory=list)
-    monetary_values: list[str] = Field(default_factory=list)
+    dates: list[CountedEntity] = Field(default_factory=list)
+    locations: list[CountedEntity] = Field(default_factory=list)
+    monetary_values: list[CountedEntity] = Field(default_factory=list)
+    numeric_metrics: list[CountedEntity] = Field(default_factory=list)
 
 
 class SentimentAnalyzerResult(BaseModel):
@@ -69,3 +85,13 @@ class DocumentClassifierResult(BaseModel):
     category: DocumentCategory
     confidence: float = Field(ge=0.0, le=1.0)
     rationale: str
+
+    @field_validator("rationale")
+    @classmethod
+    def validate_single_line_rationale(cls, value: str) -> str:
+        cleaned = value.strip()
+        if not cleaned:
+            raise ValueError("rationale must not be empty")
+        if "\n" in cleaned:
+            raise ValueError("rationale must be a single line")
+        return cleaned

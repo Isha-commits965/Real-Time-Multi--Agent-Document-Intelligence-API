@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 from fastapi import UploadFile
@@ -10,6 +11,8 @@ from app.db.models.enums import DocumentStatus, FileType
 from app.schemas.document import DocumentListItem, DocumentListResponse, DocumentUploadResponse
 from app.services.id_generator import generate_document_id
 from app.services.text_extractor import TextExtractionError, count_words, extract_text_from_file
+
+logger = logging.getLogger(__name__)
 
 
 class DocumentServiceError(Exception):
@@ -59,15 +62,28 @@ def _to_list_item(document: Document) -> DocumentListItem:
 
 async def upload_document(db: Session, file: UploadFile) -> DocumentUploadResponse:
     if not file.filename:
+        logger.warning("Upload rejected: filename is required")
         raise DocumentServiceError("Filename is required")
 
-    file_type = _resolve_file_type(file.filename)
+    try:
+        file_type = _resolve_file_type(file.filename)
+    except DocumentServiceError as exc:
+        logger.warning("Upload rejected for %s: %s", file.filename, exc.message)
+        raise
+
     max_bytes = settings.max_upload_size_mb * 1024 * 1024
     content = await file.read()
 
     if not content:
+        logger.warning("Upload rejected for %s: file is empty", file.filename)
         raise DocumentServiceError("Uploaded file is empty")
     if len(content) > max_bytes:
+        logger.warning(
+            "Upload rejected for %s: size %d bytes exceeds limit of %dMB",
+            file.filename,
+            len(content),
+            settings.max_upload_size_mb,
+        )
         raise DocumentServiceError(
             f"File exceeds maximum size of {settings.max_upload_size_mb}MB",
             status_code=413,
@@ -83,6 +99,7 @@ async def upload_document(db: Session, file: UploadFile) -> DocumentUploadRespon
         text_content = extract_text_from_file(file_path, file_type)
     except TextExtractionError as exc:
         file_path.unlink(missing_ok=True)
+        logger.warning("Text extraction failed for %s: %s", file.filename, exc)
         raise DocumentServiceError(str(exc)) from exc
 
     document = Document(
@@ -98,6 +115,13 @@ async def upload_document(db: Session, file: UploadFile) -> DocumentUploadRespon
     db.add(document)
     db.commit()
     db.refresh(document)
+    logger.info(
+        "Document uploaded: id=%s filename=%s type=%s words=%d",
+        document.id,
+        document.filename,
+        document.file_type.value,
+        document.word_count,
+    )
     return _to_upload_response(document)
 
 

@@ -9,11 +9,20 @@ Return JSON only with this exact shape:
   "confidence": 0.0
 }
 Rules:
+- summary MUST be between 100 and 150 words (inclusive)
 - key_points must have 3 to 5 items
 - confidence is between 0.0 and 1.0
 - Base the summary only on the provided document text"""
 
 
+def _normalize_summary(summary: str) -> str:
+    words = summary.split()
+    if len(words) > 150:
+        return " ".join(words[:150])
+    return summary
+
+
 async def analyze(text: str) -> dict:
     raw = await complete_json(SYSTEM_PROMPT, f"Document text:\n\n{text}")
+    raw["summary"] = _normalize_summary(raw.get("summary", ""))
     return SummarizerResult.model_validate(raw).model_dump(mode="json")

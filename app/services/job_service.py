@@ -1,4 +1,5 @@
 from datetime import UTC, datetime
+import logging
 from typing import Any
 
 from sqlalchemy import select
@@ -28,6 +29,8 @@ from app.schemas.job import (
     SummarizerAgentResponse,
 )
 from app.services.id_generator import generate_job_id
+
+logger = logging.getLogger(__name__)
 
 
 class JobServiceError(Exception):
@@ -175,6 +178,7 @@ def _to_job_list_item(job: AnalysisJob) -> JobListItem:
 def create_analysis_job(db: Session, document_id: str) -> AnalyzeTriggerResponse:
     document = db.get(Document, document_id)
     if document is None:
+        logger.warning("Analysis rejected: document not found id=%s", document_id)
         raise JobServiceError("Document not found")
 
     job_id = generate_job_id()
@@ -204,14 +208,23 @@ def create_analysis_job(db: Session, document_id: str) -> AnalyzeTriggerResponse
 
     job = db.scalar(_get_job_query().where(AnalysisJob.id == job_id))
     if job is None:
+        logger.error("Failed to reload analysis job id=%s after creation", job_id)
         raise JobServiceError("Failed to create analysis job", status_code=500)
 
+    logger.info(
+        "Analysis job created: job_id=%s document_id=%s filename=%s analysis_count=%d",
+        job.id,
+        document_id,
+        document.filename,
+        document.analysis_count,
+    )
     return _to_analyze_response(job)
 
 
 def get_job(db: Session, job_id: str) -> JobDetailResponse:
     job = db.scalar(_get_job_query().where(AnalysisJob.id == job_id))
     if job is None:
+        logger.warning("Job lookup failed: id=%s not found", job_id)
         raise JobServiceError("Job not found")
     return _to_job_detail(job)
 

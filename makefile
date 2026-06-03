@@ -1,4 +1,4 @@
-.PHONY: migrate migrate-down migrate-revision
+.PHONY: migrate migrate-down migrate-revision run
 
 migrate:
 	alembic upgrade head
@@ -8,3 +8,6 @@ migrate-down:
 
 migrate-revision:
 	alembic revision --autogenerate -m "$(msg)"
+
+run:
+	uvicorn app.main:app --reload --port 8001

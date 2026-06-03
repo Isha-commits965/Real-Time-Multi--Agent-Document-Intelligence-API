@@ -1,4 +1,5 @@
 from app.schemas.agent_results import (
+    CountedEntity,
     DocumentCategory,
     DocumentClassifierResult,
     EntityExtractorResult,
@@ -35,6 +36,7 @@ __all__ = [
     "AgentsDetailResponse",
     "AgentsStatusResponse",
     "AnalyzeTriggerResponse",
+    "CountedEntity",
     "DocumentCategory",
     "DocumentClassifierAgentResponse",
     "DocumentClassifierResult",
