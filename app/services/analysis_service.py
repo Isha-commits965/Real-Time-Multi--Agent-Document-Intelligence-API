@@ -110,15 +110,6 @@ async def _run_stub_agent(job_id: str, agent_name: AgentName, text: str) -> None
 
 
 async def _run_agent(job_id: str, agent_name: AgentName, text: str) -> None:
-    if settings.force_agent_failure == agent_name.value:
-        logger.warning(
-            "Agent forced to fail: job_id=%s agent=%s",
-            job_id,
-            agent_name.value,
-        )
-        _save_agent_failure(job_id, agent_name, 0.0, "Forced agent failure")
-        return
-
     if not settings.openai_api_key:
         await _run_stub_agent(job_id, agent_name, text)
         return

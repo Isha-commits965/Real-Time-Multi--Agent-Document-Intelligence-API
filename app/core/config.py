@@ -15,7 +15,6 @@ class Settings(BaseSettings):
     openai_model: str = "gpt-4o-mini"
     llm_timeout_seconds: float = 10.0
     max_document_chars: int = 15000
-    force_agent_failure: str | None = None
 
 
 settings = Settings()
